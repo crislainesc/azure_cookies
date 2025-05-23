@@ -1,0 +1,51 @@
+
+###
+POST http://localhost:7071/api/v1/users/create
+Content-Type: application/json
+
+{
+  "name": "Crislâine Santos Guest",
+  "email": "criissantos0606@gmail.com",
+  "phone": "11999999999",
+  "userType": "guest"
+}
+
+###
+POST http://localhost:7071/api/v1/users/create
+Content-Type: application/json
+
+{
+  "name": "Test User",
+  "email": "test@gmail.com",
+  "phone": "11999999999",
+  "userType": "internal"
+}
+
+###
+POST http://localhost:7071/api/v1/users/create
+Content-Type: application/json
+
+{
+  "name": "Crislâine Santos External",
+  "email": "criissantos0606@gmail.com",
+  "phone": "11999999999",
+  "userType": "external"
+}
+
+
+###
+PATCH http://localhost:7071/api/v1/users/update/8bf675b7-b412-418c-80ab-dd086c7719bc
+Content-Type: application/json
+
+{
+  "password": "TestCP@*-*",
+}
+
+###
+GET http://localhost:7071/api/v1/users/list
+
+###
+GET http://localhost:7071/api/v1/users/find/6afd3f49-f803-4876-9c70-9f25f3bf8984
+
+###
+PUT http://localhost:7071/api/v1/users/schema

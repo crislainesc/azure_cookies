@@ -25,24 +25,25 @@ async function getGraphClient() {
   return client;
 }
 
-export async function listUsersHandler(_request: HttpRequest, _context: InvocationContext): Promise<HttpResponseInit> {
+export async function getUserHandler(request: HttpRequest, _context: InvocationContext): Promise<HttpResponseInit> {
+  const userId = request.params.userId
   const client = await getGraphClient();
 
   try {
-    console.log("Listing users");
+    console.log("Getting user at:", `/users/${userId}`);
 
-    const users = await client.api('/users')
+    const user = await client.api(`/users/${userId}`)
       .select('displayName')
       .select('extg0ugdhy5_userDataTest')
       .get();
-    console.log("Users:", users);
+    console.log("User:", user);
 
-    return { status: 200, jsonBody: users };
+    return { status: 200, jsonBody: user };
   } catch (error) {
 
-    console.error("Error listing users:", error.message);
+    console.error("Error getting user:", error.message);
     console.error(error);
 
-    return { status: 500, jsonBody: { error: "Failed to list users" } };
+    return { status: 500, jsonBody: { error: "Failed to get user" } };
   }
 }

@@ -25,24 +25,36 @@ async function getGraphClient() {
   return client;
 }
 
-export async function listUsersHandler(_request: HttpRequest, _context: InvocationContext): Promise<HttpResponseInit> {
+export async function updateUserHandler(request: HttpRequest, _context: InvocationContext): Promise<HttpResponseInit> {
+  const body = await request.json() as any;
+  const userId = request.params.userId
+
+  console.log("Request body:", body);
+
+  const { password } = await body
+
   const client = await getGraphClient();
 
+  const userParams = {
+    passwordProfile: {
+      forceChangePasswordNextSignIn: true,
+      password,
+    },
+  };
+
   try {
-    console.log("Listing users");
+    console.log("Updating user:", userParams);
 
-    const users = await client.api('/users')
-      .select('displayName')
-      .select('extg0ugdhy5_userDataTest')
-      .get();
-    console.log("Users:", users);
+    const updatedUser = await client.api(`/users/${userId}`).update(userParams);
 
-    return { status: 200, jsonBody: users };
+    console.log("User updated:", updatedUser);
+
+    return { status: 200, jsonBody: updatedUser };
   } catch (error) {
 
-    console.error("Error listing users:", error.message);
+    console.error("Error updating user:", error.message);
     console.error(error);
 
-    return { status: 500, jsonBody: { error: "Failed to list users" } };
+    return { status: 500, jsonBody: { error: "Failed to update user" } };
   }
 }
