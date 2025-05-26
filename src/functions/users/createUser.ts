@@ -40,7 +40,7 @@ function getUserEmail(email: string, userType: string): string {
     return email;
   }
 
-  return `${email?.split('@')[0]}@iqhubjl.onmicrosoft.com`;
+  return `${email?.split('@')[0]}@Criissantosoutlook.onmicrosoft.com`;
 }
 
 export async function createUserHandler(request: HttpRequest, _context: InvocationContext): Promise<HttpResponseInit> {
@@ -77,7 +77,7 @@ export async function createUserHandler(request: HttpRequest, _context: Invocati
         identities: [
           {
             signInType: 'emailAddress',
-            issuer: 'iqhubjl.onmicrosoft.com',
+            issuer: 'Criissantosoutlook.onmicrosoft.com',
             issuerAssignedId: email
           }
         ],
@@ -97,12 +97,12 @@ export async function createUserHandler(request: HttpRequest, _context: Invocati
       console.log("Updating user at:", `/users/${user.id}`);
 
       // Updating general user information
-      await client.api(`/users/${user.id}`).update({
-        mobilePhone: phone, businessPhones: [phone], extg0ugdhy5_userDataTest: {
-          roles: ["admin", "user"].join(","),
-          master: true
-        }
-      });
+      // await client.api(`/users/${user.id}`).update({
+      //   mobilePhone: phone, businessPhones: [phone], extg0ugdhy5_userDataTest: {
+      //     roles: ["admin", "user"].join(","),
+      //     master: true
+      //   }
+      // });
 
       console.log("Finished user creation.");
 
@@ -114,7 +114,7 @@ export async function createUserHandler(request: HttpRequest, _context: Invocati
         accountEnabled: true,
         displayName: name,
         mailNickname: userEmail?.split('@')[0],
-        userPrincipalName: `${email?.split('@')[0]}@iqhubjl.onmicrosoft.com`,
+        userPrincipalName: `${email?.split('@')[0]}@Criissantosoutlook.onmicrosoft.com`,
         passwordProfile: {
           forceChangePasswordNextSignIn: true,
           password,

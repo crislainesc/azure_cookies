@@ -25,24 +25,32 @@ async function getGraphClient() {
   return client;
 }
 
-export async function listUsersHandler(_request: HttpRequest, _context: InvocationContext): Promise<HttpResponseInit> {
+export async function assingRoleHandler(request: HttpRequest, _context: InvocationContext): Promise<HttpResponseInit> {
+  const body = await request.json() as any;
+
+  console.log("Request body:", body);
+
+  const { appObjectId, userObjectId, appRoleId = '00000000-0000-0000-0000-000000000000' } = await body
+
   const client = await getGraphClient();
 
   try {
-    console.log("Listing users");
 
-    const users = await client.api('/users')
-      .select('displayName')
-      .filter(`id eq '143c6792-add5-467a-9ba1-769d648a9795'`)
-      .get();
-    console.log("Users:", users);
+    const appRoleAssignment = {
+      principalId: userObjectId,
+      resourceId: appObjectId,
+      appRoleId: appRoleId
+    };
 
-    return { status: 200, jsonBody: users };
+    const assignmentResponse = await client.api(`/servicePrincipals/${appObjectId}/appRoleAssignments`)
+      .post(appRoleAssignment);
+
+    return { status: 200, jsonBody: assignmentResponse };
   } catch (error) {
 
-    console.error("Error listing users:", error.message);
+    console.error("Error assinging user role:", error.message);
     console.error(error);
 
-    return { status: 500, jsonBody: { error: "Failed to list users" } };
+    return { status: 500, jsonBody: { error: "Failed to assing user role" } };
   }
 }

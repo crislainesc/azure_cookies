@@ -15,8 +15,8 @@ POST http://localhost:7071/api/v1/users/create
 Content-Type: application/json
 
 {
-  "name": "Test User",
-  "email": "test@gmail.com",
+  "name": "Test User 2",
+  "email": "test2@gmail.com",
   "phone": "11999999999",
   "userType": "internal"
 }
@@ -52,3 +52,12 @@ PUT http://localhost:7071/api/v1/users/schema
 
 ###
 DELETE http://localhost:7071/api/v1/users/delete/6afd3f49-f803-4876-9c70-9f25f3bf8984
+
+###
+POST http://localhost:7071/api/v1/users/roles/assign
+Content-Type: application/json
+
+{
+  "appObjectId": "5b028fe2-fbb0-43d6-9bd5-9dbf334e22cc",
+  "userObjectId": "71591f0d-d845-476b-87ff-568675f516c2"
+}
