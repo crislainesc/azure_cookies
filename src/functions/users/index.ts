@@ -4,6 +4,7 @@ import { createUserHandler } from "./createUser";
 import { updateUserHandler } from "./updateUser";
 import { getUserHandler } from "./getUser";
 import { createSchemaHandler } from "./createSchema";
+import { deleteUserHandler } from "./deleteUser";
 
 app.get('listUsers', {
   authLevel: 'anonymous',
@@ -33,4 +34,10 @@ app.put('createSchema', {
   authLevel: 'anonymous',
   handler: createSchemaHandler,
   route: "v1/users/schema",
+});
+
+app.deleteRequest('deleteUser', {
+  authLevel: 'anonymous',
+  handler: deleteUserHandler,
+  route: "v1/users/delete/{userId}",
 });

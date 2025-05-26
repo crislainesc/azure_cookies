@@ -49,3 +49,6 @@ GET http://localhost:7071/api/v1/users/find/6afd3f49-f803-4876-9c70-9f25f3bf8984
 
 ###
 PUT http://localhost:7071/api/v1/users/schema
+
+###
+DELETE http://localhost:7071/api/v1/users/delete/6afd3f49-f803-4876-9c70-9f25f3bf8984
